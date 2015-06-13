@@ -6,7 +6,7 @@ import java.util.Map;
 
 public class Calculadora {
 
-    private static String mascaras[] = {"0", "128", "192", "224", "240", "248", "252", "254"};
+    private static String mascaras[] = {"0", "128", "192", "224", "240", "248", "252", "254", "255"};
     private static Integer cidr_maximo = 30;
     private static Integer ipClasseAminimo = 1;
     private static Integer ipClasseAmaximo = 126;
@@ -84,43 +84,46 @@ public class Calculadora {
     }
 
     public Double calculaQuantidadeHosts (Integer valorListaCidr) {
-        Double d = Math.pow(2,(cidr_maximo - valorListaCidr));
-        d -= 2;
+        Double d = Math.pow(2, 32 - valorListaCidr) -2;
         return d;
     }
 
-    private String retornaMascaraClasseA (Integer valorListaCidr) {
+    private String retornaMascaraClasseA (Integer posicaoListaCidr) {
         String mascara = "255.";
-        if (valorListaCidr >= inicioCidr && valorListaCidr <= 16) {
-            mascara += mascaras[inicioCidr - valorListaCidr] + ".0.0";
-        } else if (valorListaCidr > 16 && valorListaCidr <= 24) {
-            mascara += "255." + mascaras[(16-inicioCidr) - valorListaCidr] + ".0";
+        if (posicaoListaCidr >= 0 && posicaoListaCidr <= 8) {
+            mascara += mascaras[posicaoListaCidr] + ".0.0";
+        } else if (posicaoListaCidr > 8 && posicaoListaCidr <= 16) {
+            mascara += "255." + mascaras[posicaoListaCidr - 8] + ".0";
         } else {
-            mascara += "255.255." + mascaras[(24-inicioCidr) - valorListaCidr];
+            mascara += "255.255." + mascaras[posicaoListaCidr - 16];
         }
         return mascara;
     }
 
-    private String retornaMascaraClasseB (Integer valorListaCidr) {
+    private String retornaMascaraClasseB (Integer posicaoListaCidr) {
         String mascara = "255.255.";
-        mascara += mascaras[inicioCidr - valorListaCidr] + ".0.0";
+        if (posicaoListaCidr >= 0 && posicaoListaCidr <= 8) {
+            mascara += mascaras[posicaoListaCidr] + ".0";
+        } else if (posicaoListaCidr > 8) {
+            mascara += "255." + mascaras[posicaoListaCidr - 8];
+            System.out.println(posicaoListaCidr - 8);
+        }
         return mascara;
     }
 
-    private String retornaMascaraClasseC (Integer valorListaCidr) {
-        String mascara = "255.";
-        mascara += mascaras[inicioCidr - valorListaCidr] + ".0.0";
-        return mascara;
+    private String retornaMascaraClasseC (Integer posicaoListaCidr) {
+        String mascara = "255.255.255.";
+        return mascara + mascaras[posicaoListaCidr];
     }
 
-    public String retornaMascara (Integer valorListaCidr) {
+    public String retornaMascara (Integer posicaoListaCidr) {
         switch (classe)  {
             case 1:
-                return retornaMascaraClasseA(valorListaCidr);
+                return retornaMascaraClasseA(posicaoListaCidr);
             case 2:
-                return retornaMascaraClasseB(valorListaCidr);
+                return retornaMascaraClasseB(posicaoListaCidr);
             case 3:
-                return retornaMascaraClasseC(valorListaCidr);
+                return retornaMascaraClasseC(posicaoListaCidr);
             default:
                 return " . . . .";
         }
