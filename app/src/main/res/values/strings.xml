@@ -10,4 +10,7 @@
     <string name="lblCidr">CIDR</string>
     <string name="lblClasse">Classe</string>
     <string name="lblMascaraDeRede">Máscara de Rede</string>
+    <string name="lblQtdSubRedes">Quantidade de Sub-Redes</string>
+    <string name="lblIpVazio">. . . .</string>
+    <string name="lblQtdHosts">Quantidade de Hosts</string>
 </resources>

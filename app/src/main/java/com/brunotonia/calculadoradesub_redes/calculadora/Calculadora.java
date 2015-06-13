@@ -2,6 +2,7 @@ package com.brunotonia.calculadoradesub_redes.calculadora;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class Calculadora {
 
@@ -9,7 +10,7 @@ public class Calculadora {
     private static Integer cidr_maximo = 30;
     private static Integer ipClasseAminimo = 1;
     private static Integer ipClasseAmaximo = 126;
-    private static Integer ipLoopback = 127;
+    private static Integer ipLoopback      = 127;
     private static Integer ipClasseBminimo = 128;
     private static Integer ipClasseBmaximo = 191;
     private static Integer ipClasseCminimo = 192;
@@ -27,6 +28,8 @@ public class Calculadora {
         this.cidr_str = new ArrayList<String>();
         this.cidr.clear();
         this.cidr_str.clear();
+        determinaClasseIP();
+        povoaListaCidr();
     }
 
     public String determinaClasseIP () {
@@ -36,18 +39,21 @@ public class Calculadora {
         } else if (primeiroOcteto >= ipClasseAminimo && primeiroOcteto <= ipClasseAmaximo) {
             classe = 1;
             return "Classe A";
-        } else if (primeiroOcteto >= ipClasseBminimo && primeiroOcteto <= ipClasseBmaximo) {
-            classe = 2;
-            return "Classe B";
         } else if (primeiroOcteto == ipLoopback) {
             classe = 4;
             return "Endereço de Loopback";
+        } else if (primeiroOcteto >= ipClasseBminimo && primeiroOcteto <= ipClasseBmaximo) {
+            classe = 2;
+            return "Classe B";
         } else if (primeiroOcteto >= ipClasseCminimo && primeiroOcteto <= ipClasseCmaximo) {
             classe = 3;
             return "Classe C";
-        } else {
+        } else if (primeiroOcteto > ipClasseCmaximo && primeiroOcteto < 255){
             classe = 5;
             return "Classe Indeterminada";
+        } else {
+            classe = 0;
+            return "Endereço Inválido";
         }
     }
 
@@ -60,21 +66,27 @@ public class Calculadora {
                 inicioCidr = 16;
                 break;
             case 3:
-                inicioCidr = 32;
+                inicioCidr = 24;
+                break;
+            default:
+                inicioCidr = 30;
                 break;
         }
-        for (int i = 0; i < cidr_maximo; i++) {
+        for (int i = 0; i < (cidr_maximo - inicioCidr + 1); i++) {
             cidr.add(inicioCidr + i);
             cidr_str.add("/" + new Integer(inicioCidr + i).toString());
         }
+        //cidr_str.add("");
     }
 
-    public Long calculaQuantidadeSubRedes (Integer posicaoListaCidr) {
-        return new Long (2^posicaoListaCidr);
+    public Double calculaQuantidadeSubRedes (Integer posicaoListaCidr) {
+        return Math.pow(2, posicaoListaCidr);
     }
 
-    public Long calculaQuantidadeHosts (Integer valorListaCidr) {
-        return new Long ((2^(30-valorListaCidr+2))-2);
+    public Double calculaQuantidadeHosts (Integer valorListaCidr) {
+        Double d = Math.pow(2,(cidr_maximo - valorListaCidr));
+        d -= 2;
+        return d;
     }
 
     private String retornaMascaraClasseA (Integer valorListaCidr) {
@@ -114,4 +126,11 @@ public class Calculadora {
         }
     }
 
+    public List<String> getCidr_str() {
+        return cidr_str;
+    }
+
+    public List<Integer> getCidr() {
+        return cidr;
+    }
 }

@@ -84,7 +84,7 @@
         android:id="@+id/lblInformacoesDaRede"
         android:layout_below="@+id/txtPrimeiroOcteto"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="41dp"
+        android:layout_marginTop="35dp"
         android:textStyle="bold" />
 
     <TextView
@@ -112,12 +112,10 @@
     <Spinner
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/spinner"
-        android:layout_alignTop="@+id/lblCidr"
-        android:layout_alignLeft="@+id/lblInformacoesDaRede"
-        android:layout_alignStart="@+id/lblInformacoesDaRede"
-        android:layout_alignRight="@+id/lblRestanteIP"
-        android:layout_alignEnd="@+id/lblRestanteIP" />
+        android:id="@+id/spnCidr"
+        android:layout_below="@+id/lblCidr"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -125,22 +123,70 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/lblMascaraDeRede"
         android:id="@+id/lblMascaraDeRede"
-        android:layout_below="@+id/spinner"
+        android:layout_below="@+id/spnCidr"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="15dp" />
 
-    <EditText
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/editText"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/lblIpVazio"
+        android:id="@+id/lblMascara"
         android:layout_below="@+id/lblMascaraDeRede"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:textSize="20dp"
-        android:textIsSelectable="true"
+        android:layout_marginTop="5dp"
         android:textStyle="bold"
-        android:layout_marginTop="5dp" />
+        android:layout_centerHorizontal="true"
+        android:textIsSelectable="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/lblQtdSubRedes"
+        android:id="@+id/lblQtdSubRedes"
+        android:layout_below="@+id/lblMascara"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="15dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="0"
+        android:id="@+id/lblSubRedes"
+        android:layout_below="@+id/lblQtdSubRedes"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="5dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/lblQtdHosts"
+        android:id="@+id/lblQtdHosts"
+        android:layout_below="@+id/lblSubRedes"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="15dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="0"
+        android:id="@+id/lblHosts"
+        android:layout_below="@+id/lblQtdHosts"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textStyle="bold" />
 
 </RelativeLayout>
