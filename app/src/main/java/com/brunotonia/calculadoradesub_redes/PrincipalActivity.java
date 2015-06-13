@@ -51,18 +51,10 @@ public class PrincipalActivity extends Activity {
             }
         });
 
-        spnCidr.setSelection(cidrs_str.size()-1);
-
         spnCidr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-
-                /*
-                System.out.println("CIDR Selecionado: " + cidrs.get(spnCidr.getSelectedItemPosition()));
-                System.out.println("CIDR Posicao: " + spnCidr.getSelectedItemPosition());
-                System.out.println("Qtd Hosts: " + calculadora.calculaQuantidadeHosts(cidrs.get(spnCidr.getSelectedItemPosition())).toString());
-                */
                 lblSubRedes.setText(calculadora.calculaQuantidadeSubRedes(spnCidr.getSelectedItemPosition()).toString());
                 lblHosts.setText(calculadora.calculaQuantidadeHosts(cidrs.get(spnCidr.getSelectedItemPosition())).toString());
                 lblMascara.setText(calculadora.retornaMascara(spnCidr.getSelectedItemPosition()));
