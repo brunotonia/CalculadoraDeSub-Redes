@@ -19,11 +19,14 @@ public class Calculadora {
     private Integer classe;
     private Integer inicioCidr = null;
     private List<Integer> cidr = null;
+    private List<String> cidr_str = null;
 
     public Calculadora (Integer primeiroOcteto) {
         this.primeiroOcteto = primeiroOcteto;
         this.cidr = new ArrayList<Integer>();
+        this.cidr_str = new ArrayList<String>();
         this.cidr.clear();
+        this.cidr_str.clear();
     }
 
     public String determinaClasseIP () {
@@ -62,6 +65,7 @@ public class Calculadora {
         }
         for (int i = 0; i < cidr_maximo; i++) {
             cidr.add(inicioCidr + i);
+            cidr_str.add("/" + new Integer(inicioCidr + i).toString());
         }
     }
 
@@ -95,6 +99,19 @@ public class Calculadora {
         String mascara = "255.";
         mascara += mascaras[inicioCidr - valorListaCidr] + ".0.0";
         return mascara;
+    }
+
+    public String retornaMascara (Integer valorListaCidr) {
+        switch (classe)  {
+            case 1:
+                return retornaMascaraClasseA(valorListaCidr);
+            case 2:
+                return retornaMascaraClasseB(valorListaCidr);
+            case 3:
+                return retornaMascaraClasseC(valorListaCidr);
+            default:
+                return " . . . .";
+        }
     }
 
 }

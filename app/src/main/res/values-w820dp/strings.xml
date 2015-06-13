@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="lblPrimeiroOcteto">Primeiro Octeto</string>
+    <string name="lblRestanteIP">.0.0.0</string>
+    <string name="lblCalcular">Calcular</string>
+    <string name="lblCidr">CIDR</string>
+</resources>

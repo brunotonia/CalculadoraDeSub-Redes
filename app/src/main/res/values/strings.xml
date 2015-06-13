@@ -3,4 +3,11 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="lblPrimeiroOcteto">Primeiro Octeto</string>
+    <string name="lblRestanteIP">.0.0.0</string>
+    <string name="lblCalcular">Calcular</string>
+    <string name="lblInformacoesDaRede">Informações da Rede</string>
+    <string name="lblCidr">CIDR</string>
+    <string name="lblClasse">Classe</string>
+    <string name="lblMascaraDeRede">Máscara de Rede</string>
 </resources>
